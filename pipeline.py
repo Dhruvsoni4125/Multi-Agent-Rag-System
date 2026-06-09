@@ -1,4 +1,5 @@
 from agents import build_reader_agent, build_search_agent, writer_chain, critic_chain
+import time
 
 def extract_text(content) -> str:
     if isinstance(content, str):
@@ -25,6 +26,9 @@ def run_research_pipeline(topic: str) -> dict:
     state["search_results"]= extract_text(search_result['messages'][-1].content)
     print("\n search result", state['search_results'])
 
+    # Introduce delay to prevent rate limits
+    time.sleep(5)
+
     #Step 2 - reader agent
     print("\n" + "="*50)
     print("step 2- reader agent is scrapping top respurces ...")
@@ -41,6 +45,9 @@ def run_research_pipeline(topic: str) -> dict:
 
     state['scraped_content']= extract_text(reader_result['messages'][-1].content)
     print("\nScraped content\n", state['scraped_content'])
+
+    # Introduce delay to prevent rate limits
+    time.sleep(5)
 
     #Step 3- writer chain
 
@@ -65,6 +72,9 @@ def run_research_pipeline(topic: str) -> dict:
     print("\n" + "="*50)
     print("step 3- Critic is reviewing the report ...")
     print("="*50)
+
+    # Introduce delay to prevent rate limits
+    time.sleep(5)
 
     state['feedback']=critic_chain.invoke({
         "report": state['report']
