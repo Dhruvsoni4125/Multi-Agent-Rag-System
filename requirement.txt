@@ -22,3 +22,4 @@ uvicorn
 langsmith
 pytest
 streamlit
+rich
