@@ -21,3 +21,4 @@ uvicorn
 
 langsmith
 pytest
+streamlit
