@@ -4,9 +4,14 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search, scrape_url
+import os
 from dotenv import load_dotenv  
 
 load_dotenv()  # Load environment variables from .env file
+
+# Map Gemini_API_KEY to GOOGLE_API_KEY for LangChain if necessary
+if "Gemini_API_KEY" in os.environ and "GOOGLE_API_KEY" not in os.environ:
+    os.environ["GOOGLE_API_KEY"] = os.environ["Gemini_API_KEY"]
 
 #Model Setup
 llm= ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)

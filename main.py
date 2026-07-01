@@ -2,7 +2,6 @@ import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from pipeline import run_research_pipeline
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,6 +9,8 @@ load_dotenv()
 # Map Gemini_API_KEY to GOOGLE_API_KEY for LangChain if necessary
 if "Gemini_API_KEY" in os.environ and "GOOGLE_API_KEY" not in os.environ:
     os.environ["GOOGLE_API_KEY"] = os.environ["Gemini_API_KEY"]
+
+from pipeline import run_research_pipeline
 
 app = FastAPI(
     title="Multi-Agent RAG System API",
